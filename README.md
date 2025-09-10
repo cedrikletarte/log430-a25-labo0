@@ -129,6 +129,41 @@ Gitlab éxecutera les tests dans son serveur, et ils devront passer également s
 
 > 💡 **Question 2** :  Que fait GitLab pendant les étapes de « setup » et « checkout » ? Veuillez inclure la sortie du terminal Gitlab CI dans votre réponse.
 
+#### Setup
+prépare l’environnement d’exécution du runner : provisionnement de la VM/conteneur, installation des outils demandés (ex. Python) et téléchargement/caching des actions ou dépendances. Il configure aussi les variables et secrets, crée le répertoire de travail et initialise le dépôt pour le job.
+
+Current runner version: '2.328.0'
+Runner Image Provisioner
+Operating System
+Runner Image
+GITHUB_TOKEN Permissions
+Secret source: Actions
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+Complete job name: build
+
+#### Checkout
+Pendant le checkout, le runner clone ou synchronise le dépôt dans le répertoire de travail, configure Git (safe.directory), initialise les sous-modules/LFS si nécessaire et met en place l’authentification pour accéder au repo. Ensuite il récupère la révision demandée et positionne la branche/commit en HEAD, prêt pour l’exécution du job.
+
+Run actions/checkout@v3
+Syncing repository: cedrikletarte/log430-a25-labo0
+Getting Git version info
+Temporarily overriding HOME='/home/runner/work/_temp/e6b98f4e-413f-4bf3-a591-f6a1fbc28d20' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/log430-a25-labo0/log430-a25-labo0
+Deleting the contents of '/home/runner/work/log430-a25-labo0/log430-a25-labo0'
+Initializing the repository
+Disabling automatic garbage collection
+Setting up auth
+Fetching the repository
+Determining the checkout info
+Checking out the ref
+/usr/bin/git log -1 --format='%H'
+'6b135160d70aa4b3b73909fd482981d0f4b57392'
+
 ### 4. Automatiser déploiement continu (CD)
 Après l’exécution des tests, déployez l’application dans un serveur ou machine virtuelle via SSH manuellement:
 
