@@ -21,3 +21,8 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
+      - name: Lancer les tests
+        run: |
+          cd src
+          pytest -q
+

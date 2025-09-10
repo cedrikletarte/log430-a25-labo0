@@ -92,6 +92,25 @@ python3 -m pytest
 
 > 💡 **Question 1** : Si l’un des tests échoue à cause d’un bug, comment pytest signale-t-il l’erreur et aide-t-il à la localiser ? Rédigez un test qui provoque volontairement une erreur, puis montrez la sortie du terminal obtenue.
 
+Pytest affiche le test ayant échoué (nom du test, fichier et ligne), la trace d'appel et le message d'assertion qui montre la valeur attendue et la valeur obtenue (ou un diff).
+
+====================================================================== FAILURES ======================================================================= 
+_________________________________________________________________ test_addition_error _________________________________________________________________ 
+
+    def test_addition_error():
+        my_calculator = Calculator()
+>       assert my_calculator.addition(2, 3) == 6  # This test is supposed to fail
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 5 == 6
+E        +  where 5 = addition(2, 3)
+E        +    where addition = <calculator.Calculator object at 0x000001EF82360550>.addition
+
+tests\test_calculator.py:19: AssertionError
+=============================================================== short test summary info =============================================================== 
+FAILED tests/test_calculator.py::test_addition_error - assert 5 == 6
+1 failed, 5 passed in 0.41s
+
+
 ### 2. Ajoutez une étape à la pipeline CI (intégration continue)
 
 Ajoutez une étape (step) dans `.github/workflows/.gitlab-ci.yml` pour que GitLab exécute les tests automatiquement à chaque push. 
